@@ -39,7 +39,7 @@ public static class Levenshtein
 
                 if (i > 1 && j > 1 && user[i - 1] == dictionary[j - 2] && user[i - 2] == dictionary[j - 1])
                 {
-                    common[i, j] = Math.Min(common[i, j], common[i - 2, j - 2] + cost);
+                    common[i, j] = Math.Min(common[i, j], common[i - 2, j - 2] + 1);
                 }
             }
         }
