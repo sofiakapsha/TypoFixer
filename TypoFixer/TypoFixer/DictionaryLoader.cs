@@ -20,7 +20,7 @@ public class DictionaryLoader
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Error during reding the file: {e}");
+            Console.WriteLine($"Error during reading the file: {e}");
         }
 
         return words;

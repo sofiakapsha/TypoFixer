@@ -1,7 +1,6 @@
 ﻿using TypoFixer;
 
 var dictionary = DictionaryLoader.LoadDictionary("words_list.txt");
-Console.WriteLine(Levenshtein.ComputeLevenshtein("lifer", "life")); // Має бути 1
 Console.WriteLine("Write your sentence: ");
 var input = Console.ReadLine();
 

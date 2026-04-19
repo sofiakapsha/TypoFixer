@@ -31,6 +31,7 @@ public class Suggestor
                 LenDiff = Math.Abs(word.Length - user.Length)
             })
             .OrderBy(x => x.LevenshteinScore)
+            .ThenBy(x => char.IsUpper(x.Word[0]))
             .ThenBy(x => x.LenDiff)
             .ThenByDescending(x => x.LCSScore)
             .ThenBy(x => x.Word.Length)

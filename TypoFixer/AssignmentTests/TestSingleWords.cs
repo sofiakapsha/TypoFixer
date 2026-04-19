@@ -104,7 +104,7 @@ public class Tests
         _paths[PathTypes.ProjectDir] = Path.Combine(_paths[PathTypes.SolutionDir], ProjectName);
         _paths[PathTypes.TestsExecDir] = currentWorkDir;
         _paths[PathTypes.ProjectExecDir] = Path.Combine(_paths[PathTypes.SolutionDir],
-            $"{ProjectName}/bin/Release/net9.0/{_systemTypeArgument}/publish/");
+            $"{ProjectName}/bin/Debug/net10.0/");
     }
 
     /// <summary>
