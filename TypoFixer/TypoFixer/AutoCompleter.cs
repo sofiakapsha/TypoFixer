@@ -14,13 +14,6 @@ public class AutoCompleter
         return "";
     }
 
-    public void Complete(string complete)
-    {
-        Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.Write(complete);
-        Console.ResetColor();
-    }
-
     private int BinarySearch(List<string> filteredDictionary, string word)
     {
         int left = 0;

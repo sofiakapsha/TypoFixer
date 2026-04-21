@@ -13,28 +13,8 @@ var stringBuilder = new StringBuilder();
 while (true)
 {
     var button = Console.ReadKey(intercept: true);
-
-    if (button.Key == ConsoleKey.Tab)
-    {
-        string[] text = stringBuilder.ToString().Split(new[]{' '}, StringSplitOptions.RemoveEmptyEntries);
-        var lastWord = text.LastOrDefault();
-
-        if (!string.IsNullOrEmpty(lastWord) && lastWord.Length >= 3)
-        {
-            var completion = completer.GetWord(filteredDictionary, lastWord);
-            if (!string.IsNullOrEmpty(completion))
-            {
-                stringBuilder.Append(completion);
-                Console.ResetColor();
-                Console.Write(completion);
-                
-                Console.Write("                    ");
-                for (int i = 0; i < 20; i++) Console.Write("\b");
-            }
-            
-        }
-    }
-    else if (button.Key == ConsoleKey.Enter)
+    
+    if (button.Key == ConsoleKey.Enter)
     {
         Console.Write("                    ");
         Console.WriteLine();
@@ -109,27 +89,47 @@ while (true)
     {
         stringBuilder.Append(button.KeyChar);
         Console.Write(button.KeyChar);
-        
+
         string[] text = stringBuilder.ToString().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
         var lastWord = text.LastOrDefault();
 
         if (!string.IsNullOrEmpty(lastWord) && lastWord.Length >= 3)
         {
             var completion = completer.GetWord(filteredDictionary, lastWord);
-
-            int charsToStepBack = 0;
-
+            
             if (!string.IsNullOrEmpty(completion))
             {
-                completer.Complete(completion);
-                charsToStepBack += completion.Length;
-            }
-            Console.Write("                    ");
-            charsToStepBack += 20;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write(completion);
+                Console.ResetColor();
 
-            for (int i = 0; i < charsToStepBack; i++)
-            {
-                Console.Write("\b");
+                var nextButton = Console.ReadKey(intercept: true);
+
+                for (int i = 0; i < completion.Length; i++) Console.Write("\b \b");
+
+                if (nextButton.Key == ConsoleKey.Tab)
+                {
+                    stringBuilder.Append(completion);
+                    Console.Write(completion);
+                }
+                else if (nextButton.Key == ConsoleKey.Backspace)
+                {
+                    if (stringBuilder.Length > 0)
+                    {
+                        Console.Write("\b \b");
+                        stringBuilder.Remove(stringBuilder.Length - 1, 1);
+                    }
+                }
+                else if (nextButton.Key == ConsoleKey.Spacebar)
+                {
+                    stringBuilder.Append(' ');
+                    Console.Write(' ');
+                }
+                else
+                {
+                    stringBuilder.Append(nextButton.KeyChar);
+                    Console.Write(nextButton.KeyChar);
+                }
             }
         }
     }
