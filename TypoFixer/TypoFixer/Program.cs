@@ -30,7 +30,7 @@ while (true)
     }
     else if (button.Key == ConsoleKey.Spacebar)
     {
-        string[] text = stringBuilder.ToString().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] text = stringBuilder.ToString().Split(new[] { ' ', ',', '.', '!' }, StringSplitOptions.RemoveEmptyEntries);
         var lastWord = text.LastOrDefault();
 
         if (!string.IsNullOrEmpty(lastWord) && !dictionary.Contains(lastWord.ToLower()))
@@ -90,7 +90,7 @@ while (true)
         stringBuilder.Append(button.KeyChar);
         Console.Write(button.KeyChar);
 
-        string[] text = stringBuilder.ToString().Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] text = stringBuilder.ToString().Split(new[] { ' ', ',', '.', '!' }, StringSplitOptions.RemoveEmptyEntries);
         var lastWord = text.LastOrDefault();
 
         if (!string.IsNullOrEmpty(lastWord) && lastWord.Length >= 3)
